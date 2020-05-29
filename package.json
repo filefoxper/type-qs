@@ -1,18 +1,22 @@
 {
   "name": "type-qs",
-  "version": "1.0.0",
+  "version": "1.0.5-beta",
   "main": "index.js",
   "author": "Jimmy.Harding",
   "description": "the purpose of this project is transforming search strings to types you need",
   "scripts": {
     "build": "webpack --config ./webpack.config.js --env.mode=production"
   },
-  "keywords": ["qs","type","typescript"],
+  "keywords": [
+    "qs",
+    "type",
+    "typescript"
+  ],
   "dependencies": {
     "@types/qs": "^6.9.3",
     "qs": "^6.9.3"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "7.2.2",
     "@babel/runtime": "7.3.0",
