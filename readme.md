@@ -20,7 +20,7 @@ parse(search: string, opt?: IParseOptions & { defaults?: any, template?: Templat
 we add the <strong>template and defaults</strong> into options. So you will work with template to recompute your query and use defaults to
  replace the invalid query params.
  
-<strong>if you set nothing about template, it works out just what qs.parse work.</strong>
+<strong>if you set nothing about template, it works what qs.parse works.</strong>
 # example
 check and transform
 ```
