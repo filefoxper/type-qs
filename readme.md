@@ -7,12 +7,12 @@ but we really want an object like ```{[key:string]:number|boolean|Date|string|st
 types about the values. Also we want to validate these values, if they are invalid we can replace them from an default 
 object by the key.
 
-#resolve
+# resolve
 Here is a tool ```type-qs``` which can do something like transforming value type and replacing value which is invalid.
  It use [qs](https://www.npmjs.com/package/qs) to parse your `search` to `query` first, 
  then parse query with your template.
 
-#differs with qs
+# differs with qs
 the only differs with [qs](https://www.npmjs.com/package/qs) is the parse function.
 
 parse(search: string, opt?: IParseOptions & { defaults?: any, template?: Template })
@@ -21,7 +21,7 @@ we add the template and defaults into options. So you will work with template to
  default your invalid query params.
  
 <strong>if you set nothing about template, it works out just what qs.parse work.</strong>
-#example
+# example
 check and transform
 ```
 import {parse,Parsers} from 'type-qs';
@@ -184,7 +184,7 @@ console.log(result);
     }
 }                   
 ```
-#api
+# api
 <strong>parse</strong> `search` to an object you want by `template` and `defaults` in `opt`.
 
 types:
