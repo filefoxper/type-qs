@@ -31,7 +31,7 @@ const template={
     active:Parsers.boolean(),       //get a boolean data
     role:Parsers.enum(['GUEST','USER','MASTER','ADMIN']),
                                     //get a data which only can be one of 'GUEST'|'USER'|'MASTER'|'ADMIN'
-    page:Parsers.natural()          //get a natural number, check out the source page is not a natural number, then get an undefined
+    page:Parsers.natural()          //get a natural number, check out the source page is not a natural number, but 'abc', then get an undefined
 };
 const query=parse('id=123456&name= jimmy &active=true&role=MASTER&page=abc',{template});
 ...
