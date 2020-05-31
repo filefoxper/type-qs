@@ -60,7 +60,7 @@ const template={
     page:Parsers.natural()          //get a natural number, check out the source page is not a natural number, then get an undefined
 };
 const defaults={
-    role:'GUEST',                   //notice now we change role=MASTERR in search, and it be undefined, 
+    role:'GUEST',                   //notice now we change role=MASTERR in search, and it should be undefined, 
                                     //but we give an defaults which contains a 'role' key
     page:1
 };
