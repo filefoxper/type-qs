@@ -17,7 +17,7 @@ the only differs with [qs](https://www.npmjs.com/package/qs) is the parse functi
 
 parse(search: string, opt?: IParseOptions & { defaults?: any, template?: Template })
 
-we add the template and defaults into options. So you will work with template to recompute your query and use defaults to
+we add the <strong>template and defaults</strong> into options. So you will work with template to recompute your query and use defaults to
  replace the invalid query params.
  
 <strong>if you set nothing about template, it works out just what qs.parse work.</strong>
