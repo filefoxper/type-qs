@@ -9,6 +9,10 @@ export function toDatetimeString(date: DateLike): string {
     return format(toDate(date));
 }
 
+export function getTime(date:DateLike):number {
+    return toDate(date).getTime();
+}
+
 export function startOfDay(dateLike: DateLike): Date {
     let date = toDate(dateLike);
     date.setHours(0, 0, 0, 0);

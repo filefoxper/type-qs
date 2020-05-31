@@ -1,5 +1,5 @@
 import {IParseOptions, parse as qsParse, ParsedQs} from 'qs';
-import {Parser, ParseTemplate} from "./parser.type";
+import {Parser, Template} from "./parser.type";
 import {compose, couldBeDate, toDate} from "./dateUtil";
 import {DateLike, DateLikeReduce} from "./dateUtil/type";
 import {toDateString, toDatetimeString} from "./dateReduce";
@@ -20,9 +20,9 @@ const safeNaturalParser = (value?: string, defaultValue?: number) => {
     return matchNatural(value) && isSafeInteger(Number(value)) ? Number(value) : defaultValue;
 };
 
-export class ParseType {
+export class Parsers {
 
-    static string(trim: boolean = true): Parser {
+    static string(trim?: boolean): Parser {
         return function (value?: string): string {
             const data = value || '';
             return trim ? data.trim() : data;
@@ -30,7 +30,7 @@ export class ParseType {
     };
 
     static number(): Parser {
-        return function (value?: string): Number | void {
+        return function (value?: string): Number | undefined {
             const data = Number(value || undefined);
             return isNaN(data) ? undefined : data;
         }
@@ -41,82 +41,76 @@ export class ParseType {
             if (value === undefined) {
                 return undefined;
             }
-            if (value === 'true') {
+            if (value.trim() === 'true') {
                 return true;
             }
-            if (value === 'false') {
+            if (value.trim() === 'false') {
                 return false;
             }
         }
     };
 
     static array<T>(mapper?: (data: string) => T): Parser {
-        return function (value?: string | Array<string>): Array<T> | Array<string> | void {
+        return function (value?: string | Array<string>): Array<T> | Array<string> | undefined {
             if (!Array.isArray(value) && typeof value !== 'string') {
                 return undefined;
             }
             const array = typeof value === 'string' ? value.split(',') : value;
             if (mapper) {
-                return array.map(mapper);
+                return array.map(mapper).filter((d) => d !== undefined);
             }
-            return array;
+            return array.filter((d) => d !== undefined);
         }
     }
 
     static integer(): Parser {
-        return function (value?: string): number | void {
+        return function (value?: string): number | undefined {
             return safeIntegerParser(value);
         }
     };
 
     static date(...dateLikeReduces: Array<DateLikeReduce>) {
-        return function (value?: string): DateLike | void {
-            return value && couldBeDate(value) ? compose(...dateLikeReduces)(toDate(value)) : undefined;
+        return function (value?: string): DateLike | undefined {
+            return value && couldBeDate(value) ? compose(...dateLikeReduces)(toDate(value.trim())) : undefined;
         }
     }
 
-    static datePattern<T>(): Parser {
-        const reduce = ParseType.date((dateLike: DateLike) => toDateString(dateLike));
-        return function (value?: string): string {
-            return reduce(value) as string;
+    static datePattern<T>(...dateLikeReduces: Array<DateLikeReduce>): Parser {
+        const reduce = Parsers.date((dateLike: DateLike) => toDateString(dateLike), ...dateLikeReduces);
+        return function (value?: string): string | undefined {
+            return reduce(value) as string | undefined;
         }
     };
 
-    static datetimePattern(): Parser {
-        const reduce = ParseType.date((dateLike: DateLike) => toDatetimeString(dateLike));
-        return function (value?: string): string {
-            return reduce(value) as string;
+    static datetimePattern(...dateLikeReduces: Array<DateLikeReduce>): Parser {
+        const reduce = Parsers.date((dateLike: DateLike) => toDatetimeString(dateLike), ...dateLikeReduces);
+        return function (value?: string): string | undefined {
+            return reduce(value) as string | undefined;
         }
     };
 
     static natural(): Parser {
-        return function (value?: string): number | void {
+        return function (value?: string): number | undefined {
             return safeNaturalParser(value);
         }
     };
 
-    static enum(array: Array<string>): Parser {
-        return function (value?: string): string | void {
+    static enum(array: Array<any>): Parser {
+        return function (value?: string): string | undefined {
             if (value === undefined) {
                 return value;
             }
             const valueTrim = value.trim();
-            return array.find((data) => data === valueTrim);
+            return array.find((data) => data == valueTrim);
         }
     }
 
     static regExp(regExp: RegExp): Parser {
-        return function (value?: string): string | void {
+        return function (value?: string): string | undefined {
             if (value === undefined) {
                 return value;
             }
             return regExp.test(value) ? value : undefined;
-        }
-    }
-
-    static any<T>(queryType: (data?: string) => T | undefined): Parser {
-        return function (value?: string): T | undefined {
-            return queryType(value);
         }
     }
 
@@ -140,20 +134,20 @@ function parseString(value: undefined | string | string[] | ParsedQs | ParsedQs[
     throw new Error('A ParsedQs object can not be processed by a parse function');
 }
 
-function parseArrayOrObject(value: undefined | string | string[] | ParsedQs | ParsedQs[], parser: ParseTemplate, defaults?: any) {
+function parseArrayOrObject(value: undefined | string | string[] | ParsedQs | ParsedQs[], parser: Template, defaults?: any) {
     if (value === undefined || typeof value === 'string') {
         throw new Error('A string or undefined object can not be processed by a parse config');
     }
     return parseQueryByTemplate(value, parser, defaults);
 }
 
-function parseAny(query: string[] | ParsedQs | ParsedQs[], key: string | number, parser: Parser | ParseTemplate, defaults?: any) {
+function parseAny(query: string[] | ParsedQs | ParsedQs[], key: string | number, parser: Parser | Template, defaults?: any) {
     const value = query[key];
     const nextDefaults = defaults !== undefined ? defaults[key] : defaults;
     return typeof parser === 'function' ? parseString(value, parser, nextDefaults) : parseArrayOrObject(value, parser, nextDefaults);
 }
 
-export function parseQueryByTemplate(query: string[] | ParsedQs | ParsedQs[], parseConfig: ParseTemplate, defaults?: any): any {
+export function parseQueryByTemplate(query: string[] | ParsedQs | ParsedQs[], parseConfig: Template, defaults?: any): any {
     const it = Object.entries(parseConfig);
     const array = [...it];
     if (Array.isArray(query)) {
@@ -167,9 +161,9 @@ export function parseQueryByTemplate(query: string[] | ParsedQs | ParsedQs[], pa
     }, {});
 }
 
-export function parse<T>(search: string, template: ParseTemplate, opt?: IParseOptions & { defaults?: any }) {
+export function parse<T>(search: string, opt?: IParseOptions & { defaults?: any, template?: Template }):T|ParsedQs {
     const defaultOpt = {ignoreQueryPrefix: true};
-    const {defaults, ...currentOpt} = opt;
+    const {defaults, template, ...currentOpt} = opt || {};
     const query = qsParse(search, {...defaultOpt, ...currentOpt});
-    return parseQueryByTemplate(query, template, defaults) as T;
+    return template ? parseQueryByTemplate(query, template, defaults) as T : query;
 }

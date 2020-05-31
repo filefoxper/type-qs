@@ -1,7 +1,8 @@
 import {DateLike, DateLikeReduce} from "./type";
 
 export function couldBeDate(string: string) {
-    return !isNaN(new Date(string.replace(/\-/g, '/')).getTime());
+    const time=Number(string);
+    return !isNaN(time)||!isNaN(new Date(string.replace(/\-/g, '/')).getTime());
 }
 
 function padStart(value: string, maxLength: number, startUnit: string) {
@@ -51,14 +52,18 @@ export function toDate(dateLike: DateLike) {
     if (typeof dateLike === 'string' && !couldBeDate(dateLike)) {
         throw new Error('This is a string dateLike which can not be a Date object .');
     }
-    if (typeof dateLike === 'string') {
-        return new Date(dateLike.replace(/\-/g, '/'));
+    if (typeof dateLike !== 'string') {
+        return new Date(dateLike);
     }
-    return new Date(dateLike);
+    if(isNaN(Number(dateLike))){
+        return new Date(dateLike.replace(/\-/g, '/'));
+    }else{
+        return new Date(Number(dateLike));
+    }
 }
 
 export function compose(...dateLikeReduces: Array<DateLikeReduce>) {
-    const reduces = [...dateLikeReduces].reverse();
+    const reduces = [...dateLikeReduces];
     return function (dateLike: DateLike): DateLike {
         return reduces.reduce((current, reduce) => reduce(current), dateLike);
     }
