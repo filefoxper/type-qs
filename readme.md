@@ -17,7 +17,7 @@ parse(search: string, opt?: IParseOptions & { defaults?: any, template?: Templat
 we add the <strong>template and defaults</strong> into options. So you can work with template to recompute your query and use defaults to replace the invalid query params.
  
 <strong>if you set nothing about template, it works what qs.parse works.</strong>
-# example (more in test)
+# example (more in [test](https://github.com/filefoxper/type-qs/blob/master/test/index.test.ts))
 check and transform
 ```
 import {parse,Parsers} from 'type-qs';
