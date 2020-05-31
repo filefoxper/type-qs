@@ -69,7 +69,7 @@ export class Parsers {
         }
     };
 
-    static date(...dateLikeReduces: Array<DateLikeReduce>) {
+    static date(...dateLikeReduces: Array<DateLikeReduce>):Parser {
         return function (value?: string): DateLike | undefined {
             return value && couldBeDate(value) ? compose(...dateLikeReduces)(toDate(value.trim())) : undefined;
         }
