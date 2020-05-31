@@ -2,7 +2,7 @@
 
 [github link](https://github.com/filefoxper/type-qs)
 # problem
-When we parse a search from location, we often get an object with ```{[key: string]: string|string[]|undefined}```, 
+When we parse a search from location, we often get an object like ```{[key: string]: string|string[]|undefined}```, 
 but we really want an object like ```{[key:string]:number|boolean|Date|string|string[]...} ``` which can describe more 
 types about the values. Also we want to validate these values, if they are invalid we can replace them from an default 
 object by the key.
