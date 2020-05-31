@@ -1,3 +1,5 @@
+[npm link](https://www.npmjs.com/package/type-qs)
+
 # problem
 When we parse a search from location, we often get an object with ```{[key: string]: string|string[]|undefined}```, 
 but we really want an object like ```{[key:string]:number|boolean|Date|string|string[]...} ``` which can describe more 
