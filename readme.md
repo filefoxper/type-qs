@@ -4,8 +4,7 @@
 # problem
 When we parse a search from location, we often get an object like ```{[key: string]: string|string[]|undefined}```, 
 but we really want an object like ```{[key:string]:number|boolean|Date|string|string[]...} ``` which can describe more 
-types about the values. Also we want to validate these values, if they are invalid we can replace them from an default 
-object by the key.
+types about the values. Also we want to validate these values, if they are invalid we can replace them from an default.
 
 # resolve
 Here is a tool ```type-qs``` which can do something like transforming value type and replacing value which is invalid.
