@@ -1,6 +1,4 @@
-[npm link](https://www.npmjs.com/package/type-qs)
-
-[github link](https://github.com/filefoxper/type-qs)
+[npm link](https://www.npmjs.com/package/type-qs) & [github link](https://github.com/filefoxper/type-qs)
 # problem
 When we parse a search from location, we often get an object like ```{[key: string]: string|string[]|undefined}```, 
 but we really want an object like ```{[key:string]:number|boolean|Date|string|string[]...} ``` which can describe more 
@@ -19,7 +17,7 @@ parse(search: string, opt?: IParseOptions & { defaults?: any, template?: Templat
 we add the <strong>template and defaults</strong> into options. So you can work with template to recompute your query and use defaults to replace the invalid query params.
  
 <strong>if you set nothing about template, it works what qs.parse works.</strong>
-# example
+# example (more in test)
 check and transform
 ```
 import {parse,Parsers} from 'type-qs';
