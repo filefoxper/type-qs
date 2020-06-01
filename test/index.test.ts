@@ -1,6 +1,6 @@
 import {stringify} from '../src';
 import {parse, Parsers} from '../src';
-import {endOfDay, getTime, startOfDay, toDatetimeString} from "../src/libs";
+import {endOfDay, getTime, startOfDay, toDatetimeString} from "../src";
 
 describe('parse', () => {
 

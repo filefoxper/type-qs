@@ -4,6 +4,8 @@ import {Template} from "type-query-parser";
 
 export {Parsers} from 'type-query-parser';
 
+export {endOfDay, getTime, startOfDay, toDatetimeString} from "type-query-parser/libs";
+
 export const parseQueryByTemplate = parseQuery;
 
 export function parse<T>(search: string, opt?: IParseOptions & { defaults?: any, template?: Template }): T | ParsedQs {
