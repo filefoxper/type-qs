@@ -19,7 +19,7 @@ we add the <strong>template and defaults</strong> into options. So you can work 
 <strong>if you set nothing about template, it works what qs.parse works.</strong>
 # example (more in [test](https://github.com/filefoxper/type-qs/blob/master/test/index.test.ts))
 check and transform
-```
+```js
 import {parse,Parsers} from 'type-qs';
 
 ...
@@ -45,7 +45,7 @@ console.log(query);
 }
 ```
 check and transform with default values
-```
+```js
 import {parse,Parsers} from 'type-qs';
 
 ...
@@ -76,7 +76,7 @@ console.log(query);
 }
 ```
 omit entries which we do not care
-```
+```js
 import {parse,Parsers} from 'type-qs';
 
 ...
@@ -94,7 +94,7 @@ console.log(query);
 }                                   //the 'useless' in url is omited, because the template has no key 'useless'
 ```
 make array data type by numbers
-```
+```js
 import {parse,Parsers} from 'type-qs';
 
 ...
@@ -112,7 +112,7 @@ console.log(query);
 }                 
 ```
 make a custom Parser function
-```
+```js
 import {parse,Parsers} from 'type-qs';
 
 const numberToBoolean=(value:string='')=>{
@@ -138,7 +138,7 @@ console.log(query);
 }
 ```
 use qs abilities
-```
+```js
 import {parse,stringify,Parsers} from 'type-qs';
 
 const source={

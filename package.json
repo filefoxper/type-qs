@@ -1,12 +1,16 @@
 {
   "name": "type-qs",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "main": "index.js",
   "author": "Jimmy.Harding",
   "description": "the purpose of this project is transforming search strings to types you need",
   "scripts": {
     "build": "webpack --config ./webpack.config.js --env.mode=production",
     "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/filefoxper/type-qs"
   },
   "keywords": [
     "qs",
@@ -17,7 +21,7 @@
     "parse",
     "type",
     "typescript",
-    "transform query value type"
+    "defaults"
   ],
   "dependencies": {
     "@types/qs": "^6.9.3",
