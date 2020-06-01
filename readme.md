@@ -8,7 +8,9 @@ types about the values. Also we want to validate these values, if they are inval
 Here is a tool ```type-qs``` which can do something like transforming value type and replacing value which is invalid.
  It use [qs](https://www.npmjs.com/package/qs) to parse your `search` to `query` first, 
  then parse query with your template.
-
+# dependencies
+1. [qs](https://www.npmjs.com/package/qs)
+2. [type-query-parser](https://www.npmjs.com/package/type-query-parser)
 # differs with qs
 the only differs with [qs](https://www.npmjs.com/package/qs) is the parse function.
 
@@ -311,7 +313,7 @@ pattern(pat: string)=>formatDateLike(dateLike: DateLike)=>string
                                                     
 we can use like this:
 import {parse,Parsers} from 'type-qs';
-import {startOfDay,pattern} from 'type-qs/libs';
+import {startOfDay,pattern} from 'type-query-parser/libs';
 
 const template={
     start:Parsers.date(startOfDay,pattern('YYYY-MM-DD HH:mm:ss')),

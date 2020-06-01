@@ -1,6 +1,6 @@
-import {stringify} from '../src';
-import {parse, Parsers} from '../src';
-import {endOfDay, getTime, startOfDay, toDatetimeString} from "../src";
+import {stringify,parse} from '../src';
+import {Parsers} from '../src';
+import {endOfDay, getTime, startOfDay, toDatetimeString} from "type-query-parser/libs";
 
 describe('parse', () => {
 
