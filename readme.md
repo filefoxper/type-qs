@@ -310,7 +310,8 @@ pattern(pat: string)=>formatDateLike(dateLike: DateLike)=>string
                                                     // =>'2020-05-23 12:11'
                                                     
 we can use like this:
-import {parse,Parsers,startOfDay,pattern} from 'type-qs/libs';
+import {parse,Parsers} from 'type-qs';
+import {startOfDay,pattern} from 'type-qs/libs';
 
 const template={
     start:Parsers.date(startOfDay,pattern('YYYY-MM-DD HH:mm:ss')),
