@@ -4,8 +4,6 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const pathBuilder = require('path');
 
-const libsPath = pathBuilder.resolve('src','libs', 'index.ts');
-
 const entryPath = pathBuilder.resolve('src', 'index.ts');
 
 const targetPath = pathBuilder.resolve('dist');
@@ -15,8 +13,6 @@ function entry(mode) {
         mode: mode ? (mode === 'analyze' ? 'production' : mode) : 'production',
         devtool: false,
         entry: {
-            libs:libsPath,
-            ['libs.min']: libsPath,
             ['type-qs']: entryPath,
             ['type-qs.min']: entryPath
         },
@@ -51,7 +47,6 @@ function entry(mode) {
                                 cacheDirectory: true,
                                 plugins: [
                                     ["@babel/plugin-transform-runtime"],
-                                    ['@babel/plugin-proposal-decorators', {legacy: true}],
                                     ['@babel/plugin-proposal-export-namespace-from'],
                                     [
                                         '@babel/plugin-proposal-class-properties',
