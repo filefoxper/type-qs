@@ -1,6 +1,6 @@
 {
   "name": "type-qs",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "index.js",
   "author": "Jimmy.Harding",
   "description": "the purpose of this project is transforming search strings to types you need",
@@ -14,14 +14,14 @@
   },
   "keywords": [
     "qs",
-    "url",
+    "url-parser",
     "search",
     "location.search",
     "query",
-    "parse",
+    "query-parser",
     "type",
     "typescript",
-    "defaults"
+    "browser"
   ],
   "dependencies": {
     "type-query-parser": "^1.0.1",
