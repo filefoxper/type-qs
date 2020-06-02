@@ -1,4 +1,11 @@
-[npm link](https://www.npmjs.com/package/type-qs) & [github link](https://github.com/filefoxper/type-qs)
+[![npm][npm-image]][npm-url]
+[![standard][standard-image]][standard-url]
+
+[npm-image]: https://img.shields.io/npm/v/type-qs.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/type-qs
+[standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
+[standard-url]: http://npm.im/standard
+
 # problem
 When we parse a search from location, we often get an object like ```{[key: string]: string|string[]|undefined}```, 
 but we really want an object like ```{[key:string]:number|boolean|Date|string|string[]...} ``` which can describe more 
