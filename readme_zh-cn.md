@@ -184,7 +184,7 @@ const source={
 const template={
     id:Parsers.natural(),
     more:{
-        active:Parsers.boolean,
+        active:Parsers.boolean(),
         name:Parsers.string(),
         size:Parsers.natural()
     }
