@@ -6,7 +6,7 @@
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [standard-url]: http://npm.im/standard
 
-#type-qs (稳定版) 1.2.3
+# type-qs (稳定版) 1.2.3
 
 # 问题
 通常在解析location.<strong>search</strong>（?及后续由&符号链接的字符串）的时候，我们会搬出类似[qs](https://www.npmjs.com/package/qs)、
