@@ -6,6 +6,8 @@
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [standard-url]: http://npm.im/standard
 
+#type-qs (stable) 1.2.3 [->中文文档](https://github.com/filefoxper/type-qs/blob/master/readme_zh-cn.md)
+
 # problem
 When we parse a search from location, we often get an object like ```{[key: string]: string|string[]|undefined}```, 
 but we really want an object like ```{[key:string]:number|boolean|Date|string|string[]...} ``` which can describe more 
@@ -320,7 +322,7 @@ pattern(pat: string)=>formatDateLike(dateLike: DateLike)=>string
                                                     
 we can use like this:
 import {parse,Parsers} from 'type-qs';
-import {startOfDay,pattern} from 'type-query-parser/libs';
+import {startOfDay,pattern,endOfDay,toDatetimeString} from 'type-qs/libs';
 
 const template={
     start:Parsers.date(startOfDay,pattern('YYYY-MM-DD HH:mm:ss')),
