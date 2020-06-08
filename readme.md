@@ -1,6 +1,5 @@
 [![npm][npm-image]][npm-url]
 [![standard][standard-image]][standard-url]
-[![npm downloads](https://img.shields.io/npm/dm/type-qs.svg?style=flat-square)](https://www.npmjs.com/package/type-qs)
 
 [npm-image]: https://img.shields.io/npm/v/type-qs.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/type-qs
