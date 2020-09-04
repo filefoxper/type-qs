@@ -64,6 +64,33 @@ describe('parse', () => {
         expect(target.role).toBe(defaults.role);
     });
 
+    test('none in source query',()=>{
+
+        const source1 = {
+            id: 123456,
+            name: 'jimmy ',
+            role: 'MASTER'
+        };
+
+        const search1 = stringify(source1);
+
+        const template = {
+            id: Parsers.natural(),
+            name: Parsers.string(true),
+            active: Parsers.boolean(),
+            role: Parsers.enum(['GUEST', 'USER'])
+        };
+
+        const defaults = {
+            role: 'GUEST',
+            active:true
+        };
+
+        const target = <Data>parse(search1, {template, defaults});
+
+        expect(target.active).toBe(true);
+    });
+
     test('deep matches', () => {
         type DataGroup = Data & {
             group: {
