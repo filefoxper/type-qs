@@ -14,3 +14,7 @@ export function parse<T>(search: string, opt?: IParseOptions & { defaults?: any,
 export function stringify(obj: any, opt?: IStringifyOptions): string {
     return qsStringify(obj, opt);
 }
+
+export {
+    Template
+}

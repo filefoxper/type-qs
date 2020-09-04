@@ -1,6 +1,6 @@
 {
   "name": "type-qs",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "main": "index.js",
   "author": "Jimmy.Harding",
   "description": "the purpose of this project is transforming search strings to types you need",
