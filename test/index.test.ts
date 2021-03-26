@@ -284,3 +284,32 @@ describe("Parsers", () => {
     });
 
 });
+
+describe('parse complex',()=>{
+
+    const data={
+        id:1,
+        name:'name',
+        complex:{
+            sex:'MALE',
+            books:['book1','book2']
+        }
+    }
+
+    const template={
+        id:Parsers.natural(),
+        name:Parsers.string(),
+        complex: {
+            sex:Parsers.enum(['MALE','FEMALE']),
+            books: Parsers.array()
+        }
+    }
+
+    test('complex4',()=>{
+        const {complex,...rest}=data;
+        const url=stringify({...rest,complex:{sex:'MALE'}});
+        const result=parse(url,{template,defaults:{complex:{books:['book1']}}});
+        expect(result).toEqual({...rest,complex:{sex:'MALE',books:['book1']}});
+    });
+
+});
