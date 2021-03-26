@@ -4,11 +4,14 @@ import {Template} from "type-query-parser/core/index.type";
 
 export {Parsers} from 'type-query-parser';
 
-export function parse<T>(search: string, opt?: IParseOptions & { defaults?: any, template?: Template }): T | ParsedQs {
+export function parse<T>(search: string, opt: IParseOptions & { defaults?: any, template: Template }): T {
     const defaultOpt = {ignoreQueryPrefix: true};
-    const {defaults, template, ...currentOpt} = opt || {};
+    const {defaults, template, ...currentOpt} = opt;
+    if(!template){
+        throw new Error('you need provide a template for parsing.');
+    }
     const query = qsParse(search, {...defaultOpt, ...currentOpt});
-    return template ? parseQuery(query, template, defaults) as T : query;
+    return parseQuery<T>(query, template, defaults) as T;
 }
 
 export function stringify(obj: any, opt?: IStringifyOptions): string {

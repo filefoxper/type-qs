@@ -1,6 +1,6 @@
 {
   "name": "type-qs",
-  "version": "1.2.5",
+  "version": "1.4.0",
   "main": "index.js",
   "author": "Jimmy.Harding",
   "description": "the purpose of this project is transforming search strings to types you need",
@@ -25,12 +25,12 @@
     "browser"
   ],
   "dependencies": {
-    "type-query-parser": "^1.0.3",
+    "type-query-parser": "^1.2.0",
     "@types/qs": "^6.9.3",
     "qs": "^6.9.3"
   },
   "peerDependencies": {
-    "type-query-parser": "^1.0.3"
+    "type-query-parser": "^1.2.0"
   },
   "license": "MIT",
   "devDependencies": {
