@@ -49,7 +49,8 @@
 # 例子
 校验及类型转化
 ```js
-import {parse,Parsers} from 'type-qs';
+import {parse} from 'type-qs';
+import {Parsers} from 'type-qs/libs';
 
 ...
 const template={                    //解析模版
@@ -60,7 +61,7 @@ const template={                    //解析模版
                                     //枚举规范器，规定字符串在枚举数组中有值==（注意不是===），并返回枚举中==的值，如找不到，返回undefined
     page:Parsers.natural()          //自然数解析器, 注意，因为被解析字符串中的page=abc,并非自然数，所以自然数解析器返回undefined
 };
-const query=parse('id=123456&name= jimmy &active=true&role=MASTER&page=abc',{template});
+const query = parse('id=123456&name= jimmy &active=true&role=MASTER&page=abc',{template});
 ...
 console.log(query);
 
@@ -75,7 +76,8 @@ console.log(query);
 ```
 校验失败使用默认数据
 ```js
-import {parse,Parsers} from 'type-qs';
+import {parse} from 'type-qs';
+import {Parsers} from 'type-qs/libs';
 
 ...
 const template={
@@ -91,7 +93,7 @@ const defaults={
                                     //但遇到了好心的默认数据，所以最终结果为默认数据GUEST
     page:1                          //page也遇到了默认数据，所以变成了1
 };
-const query=parse('id=123456&name= jimmy &active=true&role=MASTERR&page=abc',{template,defaults});
+const query = parse('id=123456&name= jimmy &active=true&role=MASTERR&page=abc',{template,defaults});
 ...
 console.log(query);
 
@@ -106,7 +108,8 @@ console.log(query);
 ```
 截取关心数据（只有在parse option.template中出现过的key才能被解析至最终结果）
 ```js
-import {parse,Parsers} from 'type-qs';
+import {parse} from 'type-qs';
+import {Parsers} from 'type-qs/libs';
 
 ...
 const template={
@@ -125,7 +128,8 @@ console.log(query);
 ```
 把字符串类型数组转成其他类型的数组（Parsers.array(mapper?:(value:string)=>any)）
 ```js
-import {parse,Parsers} from 'type-qs';
+import {parse} from 'type-qs';
+import {Parsers} from 'type-qs/libs';
 
 ...
 const template={
@@ -144,7 +148,7 @@ console.log(query);
 ```
 自定义Parser:(value?:string|string[])=>any
 ```js
-import {parse,Parsers} from 'type-qs';
+import {parse} from 'type-qs';
 
 const numberToBoolean=(value:string='')=>{
     if(value.trim()==='1'){
@@ -170,7 +174,8 @@ console.log(query);
 ```
 嵌套对象解析
 ```js
-import {parse,stringify,Parsers} from 'type-qs';
+import {parse,stringify} from 'type-qs';
+import {Parsers} from 'type-qs/libs';
 
 const source={
     id:1,
@@ -213,8 +218,8 @@ console.log(result);
 ```
 时间解析
 ```js
-import {parse,Parsers} from 'type-qs';
-import {startOfDay,pattern} from 'type-qs/libs';
+import {parse} from 'type-qs';
+import {Parsers,startOfDay,pattern} from 'type-qs/libs';
 
 const template={
     start:Parsers.date(startOfDay,pattern('YYYY-MM-DD HH:mm:ss')),
@@ -317,8 +322,8 @@ type DateLikeReduce = (dateLike: DateLike) => DateLike;
 自定是时间格式字符串，<strong>注意：它调用返回的方法才是DateLikeReduce</strong>
 
 ```js
-import {parse,Parsers} from 'type-qs';
-import {startOfDay,pattern,endOfDay,toDatetimeString} from 'type-qs/libs';
+import {parse} from 'type-qs';
+import {Parsers,startOfDay,pattern,endOfDay,toDatetimeString} from 'type-qs/libs';
 
 const template={
     start:Parsers.date(startOfDay,pattern('YYYY-MM-DD HH:mm:ss')),

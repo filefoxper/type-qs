@@ -6,7 +6,7 @@
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [standard-url]: http://npm.im/standard
 
-# type-qs (stable) 1.2.3 [->中文文档](https://github.com/filefoxper/type-qs/blob/master/readme_zh-cn.md)
+# type-qs [->中文文档](https://github.com/filefoxper/type-qs/blob/master/readme_zh-cn.md)
 
 # problem
 When we parse a search from location, we often get an object like ```{[key: string]: string|string[]|undefined}```, 
@@ -31,7 +31,8 @@ we add the <strong>template and defaults</strong> into options. So you can work 
 # example (more in [test](https://github.com/filefoxper/type-qs/blob/master/test/index.test.ts))
 check and transform
 ```js
-import {parse,Parsers} from 'type-qs';
+import {parse} from 'type-qs';
+import {Parsers} from 'type-qs/libs';
 
 ...
 const template={
@@ -57,7 +58,8 @@ console.log(query);
 ```
 check and transform with default values
 ```js
-import {parse,Parsers} from 'type-qs';
+import {parse} from 'type-qs';
+import {Parsers} from 'type-qs/libs';
 
 ...
 const template={
@@ -88,7 +90,8 @@ console.log(query);
 ```
 omit entries which we do not care
 ```js
-import {parse,Parsers} from 'type-qs';
+import {parse} from 'type-qs';
+import {Parsers} from 'type-qs/libs';
 
 ...
 const template={
@@ -106,7 +109,8 @@ console.log(query);
 ```
 make array data type by numbers
 ```js
-import {parse,Parsers} from 'type-qs';
+import {parse} from 'type-qs';
+import {Parsers} from 'type-qs/libs';
 
 ...
 const template={
@@ -124,7 +128,8 @@ console.log(query);
 ```
 make a custom Parser function
 ```js
-import {parse,Parsers} from 'type-qs';
+import {parse} from 'type-qs';
+
 
 const numberToBoolean=(value:string='')=>{
     if(value.trim()==='1'){
@@ -150,7 +155,8 @@ console.log(query);
 ```
 use qs abilities
 ```js
-import {parse,stringify,Parsers} from 'type-qs';
+import {parse,stringify} from 'type-qs';
+import {Parsers} from 'type-qs/libs';
 
 const source={
     id:1,
@@ -176,8 +182,8 @@ const defaults={
     }
 };
 
-const search=stringify(source);                 //id=1&more%5Bactive%5D=true&more%5Bname%5D=Jimmy&more%5Bsize%5D=ab
-const result=parse(search,{template,defaults});
+const search = stringify(source);                 //id=1&more%5Bactive%5D=true&more%5Bname%5D=Jimmy&more%5Bsize%5D=ab
+const result = parse(search,{template,defaults});
 ...
 console.log(result);
 

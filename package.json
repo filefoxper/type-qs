@@ -1,12 +1,15 @@
 {
   "name": "type-qs",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "main": "index.js",
   "author": "Jimmy.Harding",
   "description": "the purpose of this project is transforming search strings to types you need",
   "scripts": {
-    "build": "webpack --config ./webpack.config.js --env.mode=production",
-    "clear": "rm -rf ./dist",
+    "clear": "rm -rf ./dist & rm -rf ./es",
+    "base-build": "webpack --config ./webpack.config.js --env.mode=production",
+    "es-build": "babel src --extensions '.ts' --no-comments --config-file ./babel.es.config.js --out-dir es",
+    "es-d": "cp ./index.d.ts ./es/index.d.ts & cp ./libs/index.d.ts ./es/libs/index.d.ts",
+    "build": "mkdir ./es & mkdir ./es/libs & npm run es-d & npm run es-build & npm run base-build",
     "test": "jest"
   },
   "repository": {
@@ -15,6 +18,7 @@
   },
   "files": [
     "dist",
+    "es",
     "libs",
     "index.js",
     "index.d.ts"
@@ -41,6 +45,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.13.16",
     "@babel/core": "7.2.2",
     "@babel/runtime": "7.3.0",
     "@babel/preset-env": "^7.5.2",
