@@ -62,15 +62,17 @@ function entry(mode) {
                                         '@babel/preset-env',
                                         {
                                             modules: false,
-                                            targets:{
-                                                ie:"8"
-                                            }
+                                            targets: {
+                                                "browsers": ["last 2 versions", "ie >=9"]
+                                            },
+                                            useBuiltIns: "usage",
+                                            corejs: {version: 3, proposals: true}
                                         }
                                     ],
+                                    '@babel/preset-typescript'
                                 ]
                             }
-                        },
-                        "ts-loader"
+                        }
                     ]
                 }
             ]
