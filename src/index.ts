@@ -12,11 +12,8 @@ function parseString(value: undefined | null | string | string[] | ParsedQs | Pa
     if (value === undefined) {
         return defaults !== undefined ? defaults : undefined;
     }
-    if (typeof value === 'string' || isStringArray(value)) {
-        const result = parse(value);
-        return result === undefined && defaults !== undefined ? defaults : result;
-    }
-    throw new Error('A ParsedQs object can not be processed by a parse function');
+    const result = parse(value as string|string[]);
+    return result === undefined && defaults !== undefined ? defaults : result;
 }
 
 function parseArrayOrObject(value: undefined | null | string | string[] | ParsedQs | ParsedQs[], parser: Template, defaults?: any) {

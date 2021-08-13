@@ -29,11 +29,19 @@ export class Parsers {
     };
 
     static array<T>(mapper?: (data: string) => T): Parser {
-        return function (value?: string | Array<string>): Array<T> | Array<string> | undefined {
+        function protectArray(value: string | string[]|Record<string, string>):string | string[] {
             if (!Array.isArray(value) && typeof value !== 'string') {
+                const keys = Object.keys(value);
+                return Array.from({...value,length:keys.length}).filter((d)=>d!==undefined) as Array<string>;
+            }
+            return value;
+        }
+        return function (value?: string | string[]|Record<string, string>): Array<T> | Array<string> | undefined {
+            if(value===undefined||value===null){
                 return undefined;
             }
-            const array = typeof value === 'string' ? value.split(',') : value;
+            const val = protectArray(value);
+            const array = typeof val === 'string' ? val.split(',') : val;
             if (mapper) {
                 return array.map(mapper).filter((d) => d !== undefined);
             }

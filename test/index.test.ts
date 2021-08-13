@@ -243,7 +243,7 @@ describe("Parsers", () => {
 
     test('Parses.array',()=>{
         type Query={array:Array<number>};
-        const array:Array<string>=['1','2','3'];
+        const array:Array<number>=Array.from({length:32}).map((d,i)=>i);
         const query={
             array
         };
@@ -251,7 +251,7 @@ describe("Parsers", () => {
         const template={
             array:Parsers.array(Parsers.natural())
         };
-        expect(parse<Query>(search,{template}).array).toEqual([1,2,3]);
+        expect(parse<Query>(search,{template}).array).toEqual(array);
         expect(parse<Query>('array=1,2,3',{template}).array).toEqual([1,2,3]);
     });
 
@@ -310,5 +310,7 @@ describe('parse complex',()=>{
         const result=parse(url,{template,defaults:{complex:{books:['book1']}}});
         expect(result).toEqual({...rest,complex:{sex:'MALE',books:['book1']}});
     });
+
+    test
 
 });
