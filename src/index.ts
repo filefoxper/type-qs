@@ -8,12 +8,22 @@ function isStringArray(value: any): value is string[] {
     return value.every((e) => typeof e === 'string');
 }
 
+function objectCanBeArray(obj:any) {
+    if(!obj){
+        return false;
+    }
+    return Object.keys(obj).every((k)=>k&&!Number.isNaN(Number(k)));
+}
+
 function parseString(value: undefined | null | string | string[] | ParsedQs | ParsedQs[], parse: Parser, defaults?: any) {
     if (value === undefined) {
         return defaults !== undefined ? defaults : undefined;
     }
-    const result = parse(value as string|string[]);
-    return result === undefined && defaults !== undefined ? defaults : result;
+    if (typeof value === 'string' || isStringArray(value)||objectCanBeArray(value)) {
+        const result = parse(value as string|string[]);
+        return result === undefined && defaults !== undefined ? defaults : result;
+    }
+    throw new Error('A ParsedQs object can not be processed by a parse function');
 }
 
 function parseArrayOrObject(value: undefined | null | string | string[] | ParsedQs | ParsedQs[], parser: Template, defaults?: any) {
